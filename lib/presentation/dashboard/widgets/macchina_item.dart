@@ -5,7 +5,6 @@ import '/core/configs/theme/app_colors.dart';
 import '/domain/linea_dashboard/entities/dettaglio_macchina.dart';
 
 import '/presentation/dashboard/widgets/workorder_dialog.dart';
-import '/presentation/dashboard/widgets/tecnico_operativo.dart';
 
 class MacchinaItem extends StatelessWidget {
   const MacchinaItem({

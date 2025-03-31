@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
-import 'package:logger/logger.dart';
 
 import '/common/helper/mapper/tecnico.dart';
 

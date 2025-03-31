@@ -1,11 +1,10 @@
 import 'dart:convert';
 
-import 'package:carl_coind_dashboard/domain/macchine/entities/macchina.dart';
-import 'package:carl_coind_dashboard/domain/tecnici/entities/tecnico.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:carl_coind_dashboard/core/entity/macchina.dart';
-import 'package:carl_coind_dashboard/domain/linee/entities/linea.dart';
+import '/domain/macchine/entities/macchina.dart';
+import '/domain/tecnici/entities/tecnico.dart';
+import '/domain/linee/entities/linea.dart';
 
 class WOEntity {
   final String? id;
