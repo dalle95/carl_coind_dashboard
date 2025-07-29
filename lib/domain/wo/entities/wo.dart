@@ -26,6 +26,8 @@ class WOEntity {
   final String? tipoIntervento;
   final String? note;
   final List<TecnicoEntity> tecnici;
+  final String? cambioFormatoDa;
+  final String? cambioFormatoA;
 
   const WOEntity({
     this.id,
@@ -47,6 +49,8 @@ class WOEntity {
     this.tipoIntervento,
     this.note,
     this.tecnici = const [],
+    this.cambioFormatoDa,
+    this.cambioFormatoA,
   });
 
   factory WOEntity.empty() {
@@ -66,6 +70,12 @@ class WOEntity {
       statoMacchina: '',
       operatoreLinea: '',
       tipoIntervento: '',
+      note: '',
+      tecnici: [],
+      puntoDiStruttura: null,
+      impianto: null,
+      cambioFormatoDa: '',
+      cambioFormatoA: '',
     );
   }
 
@@ -89,6 +99,8 @@ class WOEntity {
     ValueGetter<String?>? tipoIntervento,
     String? note,
     List<TecnicoEntity>? tecnici,
+    String? cambioFormatoDa,
+    String? cambioFormatoA,
   }) {
     return WOEntity(
       id: id != null ? id() : this.id,
@@ -116,6 +128,8 @@ class WOEntity {
           tipoIntervento != null ? tipoIntervento() : this.tipoIntervento,
       note: note ?? this.note,
       tecnici: tecnici ?? this.tecnici,
+      cambioFormatoDa: cambioFormatoDa ?? this.cambioFormatoDa,
+      cambioFormatoA: cambioFormatoA ?? this.cambioFormatoA,
     );
   }
 
@@ -138,6 +152,8 @@ class WOEntity {
       'operatoreLinea': operatoreLinea,
       'note': note,
       'tipoIntervento': tipoIntervento,
+      'cambioFormatoDa': cambioFormatoDa,
+      'cambioFormatoA': cambioFormatoA,
     };
   }
 
@@ -166,6 +182,8 @@ class WOEntity {
       operatoreLinea: map['operatoreLinea'],
       note: map['note'],
       tipoIntervento: map['tipoIntervento'],
+      cambioFormatoDa: map['cambioFormatoDa'],
+      cambioFormatoA: map['cambioFormatoA'],
     );
   }
 

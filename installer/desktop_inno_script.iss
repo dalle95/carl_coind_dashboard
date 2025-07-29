@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Carl Dashboard Coind"
-#define MyAppVersion "1.8"
+#define MyAppVersion "2.35"
 #define MyAppPublisher "Dinova S.R.L."
 #define MyAppURL "https://www.dinova.one/"
 #define MyAppExeName "carl_coind_dashboard.exe"

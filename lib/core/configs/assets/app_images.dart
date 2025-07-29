@@ -3,7 +3,8 @@ class AppImages {
 
   static const logo = '${basePath}logo.png';
 
-  static const movieImageBasePath = 'https://image.tmdb.org/t/p/w500';
+  static const cambiaFormatoAttesa = '${basePath}cambio_formato_attesa.png';
+  static const cambiaFormatoInCorso = '${basePath}cambio_formato_incorso.png';
 
   static const splashBackground = '${basePath}splash-bg.png';
 

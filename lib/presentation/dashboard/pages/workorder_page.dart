@@ -1,7 +1,7 @@
-import 'package:carl_coind_dashboard/domain/tecnici/entities/tecnico.dart';
 import 'package:flutter/material.dart';
 
 import '/domain/wo/entities/wo.dart';
+import '/domain/tecnici/entities/tecnico.dart';
 
 class WorkOrderDetailPage extends StatelessWidget {
   final WOEntity workOrder;
@@ -36,18 +36,56 @@ class WorkOrderDetailPage extends StatelessWidget {
                 _buildRow(context, 'Codice', workOrder.codice, textTheme),
                 _buildRow(
                     context, 'Descrizione', workOrder.descrizione, textTheme),
-                _buildRow(context, 'Data Creazione',
-                    _formatDate(workOrder.dataCreazione), textTheme),
+                _buildRow(context, 'Tipologia', workOrder.natura, textTheme),
+                if (workOrder.natura == 'Cambio formato') ...[
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 450,
+                        child: _buildRow(context, 'Data Creazione',
+                            _formatDate(workOrder.dataCreazione), textTheme),
+                      ),
+                      SizedBox(
+                        width: 450,
+                        child: _buildRow(context, 'Data Programmata',
+                            _formatDate(workOrder.dataInizio), textTheme),
+                      ),
+                    ],
+                  ),
+                ] else ...[
+                  _buildRow(context, 'Data Creazione',
+                      _formatDate(workOrder.dataCreazione), textTheme),
+                ],
                 _buildRow(context, 'Operatore Linea', workOrder.operatoreLinea,
                     textTheme),
-                _buildRow(context, 'Gravità guasto', workOrder.statoMacchina,
-                    textTheme),
+                if (workOrder.natura == 'Cambio formato') ...[
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 450,
+                        child: _buildRow(context, 'Da',
+                            workOrder.cambioFormatoDa, textTheme),
+                      ),
+                      SizedBox(
+                        width: 450,
+                        child: _buildRow(
+                            context, 'A', workOrder.cambioFormatoA, textTheme),
+                      ),
+                    ],
+                  ),
+                ],
+                if (workOrder.natura != 'Cambio formato') ...[
+                  _buildRow(context, 'Gravità guasto', workOrder.statoMacchina,
+                      textTheme),
+                ],
                 _buildRow(context, 'Stato', workOrder.stato, textTheme),
                 const Divider(height: 32),
                 _buildRow(context, 'Linea',
                     workOrder.puntoDiStruttura?.descrizione ?? '-', textTheme),
-                _buildRow(context, 'Macchina',
-                    workOrder.impianto?.descrizione ?? '-', textTheme),
+                if (workOrder.natura != 'Cambio formato') ...[
+                  _buildRow(context, 'Macchina',
+                      workOrder.impianto?.descrizione ?? '-', textTheme),
+                ],
                 const Divider(height: 32),
                 Text(
                   'Note Meccanico:',
@@ -89,7 +127,11 @@ class WorkOrderDetailPage extends StatelessWidget {
   }
 
   Widget _buildRow(
-      BuildContext context, String label, String? value, TextTheme textTheme) {
+    BuildContext context,
+    String label,
+    String? value,
+    TextTheme textTheme,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(

@@ -38,16 +38,20 @@ Widget buildForm({
     children: [
       TextField(
         controller: emailController,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).colorScheme.surface,
+        ),
         decoration: InputDecoration(
           labelText: 'Username',
           labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.surface,
               ),
           floatingLabelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.surface,
+                fontWeight: FontWeight.w600,
               ),
-          fillColor: Theme.of(context).colorScheme.primary,
+          fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.6),
         ),
       ),
       const SizedBox(height: 16),
@@ -55,16 +59,20 @@ Widget buildForm({
       TextField(
         controller: passwordController,
         obscureText: true,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).colorScheme.surface,
+        ),
         decoration: InputDecoration(
           labelText: 'Password',
           labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.surface,
               ),
           floatingLabelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.surface,
+                fontWeight: FontWeight.w600,
               ),
-          fillColor: Theme.of(context).colorScheme.primary,
+          fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.6),
         ),
       ),
     ],

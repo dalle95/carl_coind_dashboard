@@ -1,3 +1,4 @@
+import 'package:carl_coind_dashboard/core/configs/assets/app_images.dart';
 import 'package:flutter/material.dart';
 
 import '/domain/wo/entities/wo.dart';
@@ -5,15 +6,20 @@ import '/domain/wo/entities/wo.dart';
 import '/presentation/dashboard/pages/workorder_page.dart';
 
 class WorkOrdersDialog extends StatelessWidget {
+  final String titolo;
   final List<WOEntity> workOrders;
 
-  const WorkOrdersDialog({super.key, required this.workOrders});
+  const WorkOrdersDialog({
+    super.key,
+    required this.titolo,
+    required this.workOrders,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(
-        'Interventi',
+        titolo,
         style: TextStyle(
           color: Theme.of(context).colorScheme.surface,
           fontWeight: FontWeight.bold,
@@ -36,20 +42,10 @@ class WorkOrdersDialog extends StatelessWidget {
                 separatorBuilder: (_, __) => const Divider(),
                 itemBuilder: (context, index) {
                   final wo = workOrders[index];
-                  return ListTile(
+                  var listTile2 = ListTile(
                     contentPadding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                    leading: wo.statoMacchina == 'Bloccante'
-                        ? const Icon(
-                            Icons.warning_amber_rounded,
-                            color: Colors.redAccent,
-                            size: 28,
-                          )
-                        : Icon(
-                            Icons.info_outlined,
-                            color: Colors.yellow[600],
-                            size: 28,
-                          ),
+                    leading: getIcon(wo),
                     title: Text(
                       wo.codice ?? 'Senza codice',
                       style: TextStyle(
@@ -101,6 +97,8 @@ class WorkOrdersDialog extends StatelessWidget {
                       );
                     },
                   );
+                  var listTile = listTile2;
+                  return listTile;
                 },
               ),
       ),
@@ -111,5 +109,34 @@ class WorkOrdersDialog extends StatelessWidget {
         )
       ],
     );
+  }
+
+  Widget getIcon(WOEntity wo) {
+    if (wo.natura == 'Cambio formato') {
+      return SizedBox(
+        width: 30,
+        height: 30,
+        child: ClipRRect(
+          child: Image.asset(
+            AppImages.cambiaFormatoInCorso,
+            fit: BoxFit.cover,
+            filterQuality: FilterQuality.high,
+            isAntiAlias: true,
+          ),
+        ),
+      );
+    }
+
+    return wo.statoMacchina == 'Bloccante'
+        ? const Icon(
+            Icons.warning_amber_rounded,
+            color: Colors.redAccent,
+            size: 28,
+          )
+        : Icon(
+            Icons.info_outlined,
+            color: Colors.yellow[600],
+            size: 28,
+          );
   }
 }

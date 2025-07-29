@@ -1,12 +1,13 @@
 class ApiUrl {
-  static const baseURL = 'https://coind.in-am.it/gmaoCS02/api/';
+  static const baseURL = 'https://coind7.in-am.it/gmaoCS02/api/';
 
   static const authentication = 'auth/v1/authenticate';
 
   static const attore = 'entities/v1/actor?filter[code]=';
   static const tecnici =
       'entities/v1/technician?include=actor&filter[statusCode]=ACTIVE&sort=code';
-  static const linee = 'entities/v1/box?filter[eqptType]=LINEA&sort=code';
+  static const linee =
+      'entities/v1/box?filter[eqptType]=LINEA&filter[statusCode]=VALIDATE&sort=code';
   static const macchine = 'entities/v1/material?filter[statusCode]=VALIDATE';
   static const legami =
       'entities/v1/linkequipment?include=parent,child&filter[junction.id]=18772c37196-7f3&filter[linkEnd]=2200-12-31T01:00:00.000';

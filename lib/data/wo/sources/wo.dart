@@ -298,6 +298,7 @@ Future<List<WOModel>> parseWOListFromResponse(
           codice: puntoDiStrutturaRecord['attributes']?['code'],
           descrizione: puntoDiStrutturaRecord['attributes']?['description'],
           stato: puntoDiStrutturaRecord['attributes']?['statusCode'],
+          woCambioStato: [],
         );
       }
     }
@@ -330,8 +331,11 @@ Future<List<WOModel>> parseWOListFromResponse(
         codice: codice ?? 'Nessuno',
         descrizione: record['attributes']?['description'] ?? 'Nessuno',
         stato: descrizioneStato,
-        natura:
-            natura != null ? natura['attributes']['description'] : 'Nessuna',
+        natura: natura != null
+            ? natura['attributes']['description'] == 'Richieste a guasto'
+                ? natura['attributes']['description']
+                : 'Cambio formato'
+            : 'Nessuna',
         dataCreazione: record['attributes']?['createDate'] != null
             ? DateUtils.conversioneDataCarlFormatDateTime(
                 record['attributes']['createDate'])
@@ -361,6 +365,8 @@ Future<List<WOModel>> parseWOListFromResponse(
         impianto: impianto,
         tipoIntervento: tipoIntervento,
         note: note?['attributes']['rawDescription'],
+        cambioFormatoDa: record['attributes']?['xtraTxt04'] ?? '',
+        cambioFormatoA: record['attributes']?['xtraTxt05'] ?? '',
       ),
     );
   }

@@ -7,10 +7,14 @@ class CardCustom extends StatelessWidget {
     super.key,
     required this.titolo,
     required this.contenuto,
+    this.titoloBackgroundColor,
+    this.onTitleTap,
   });
 
   final String titolo;
   final Widget contenuto;
+  final Color? titoloBackgroundColor;
+  final VoidCallback? onTitleTap;
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +33,25 @@ class CardCustom extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            width: double.infinity,
-            //padding: const EdgeInsets.symmetric(vertical: 10),
-            color: AppColors.primary,
-            alignment: Alignment.center,
-            child: Text(
-              titolo.toUpperCase(),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.background,
-                  ),
+          InkWell(
+            onTap: onTitleTap,
+            child: Container(
+              width: double.infinity,
+              color: titoloBackgroundColor ?? AppColors.primary,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              child: Text(
+                titolo.toUpperCase(),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: titoloBackgroundColor == Colors.yellow
+                          ? Colors.black
+                          : Theme.of(context).colorScheme.background,
+                    ),
+              ),
             ),
           ),
           Expanded(

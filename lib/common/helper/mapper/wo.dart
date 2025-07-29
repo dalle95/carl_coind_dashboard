@@ -22,6 +22,8 @@ class WOMapper {
       operatoreLinea: wo.operatoreLinea,
       tipoIntervento: wo.tipoIntervento,
       note: wo.note,
+      cambioFormatoDa: wo.cambioFormatoDa,
+      cambioFormatoA: wo.cambioFormatoA,
     );
   }
 }

@@ -29,6 +29,8 @@ class MacchinaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double altezzaTecnici = 40;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -40,6 +42,7 @@ class MacchinaItem extends StatelessWidget {
             showDialog(
               context: context,
               builder: (context) => WorkOrdersDialog(
+                titolo: 'Guasti - ${dettaglioMacchina.macchina.descrizione}',
                 workOrders: dettaglioMacchina.interventi,
               ),
             );
@@ -110,48 +113,105 @@ class MacchinaItem extends StatelessWidget {
         //   ),
         // )
 
-        if (dettaglioMacchina.tecnici.isNotEmpty)
-          Flexible(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.account_circle,
-                  color: AppColors.secondBackground,
-                  size: 15,
-                ),
-                Container(
-                  padding: const EdgeInsets.all(2),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF2C2B2B),
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(
-                      color: Theme.of(context).colorScheme.primary,
-                      width: 1,
+        // if (dettaglioMacchina.tecnici.isNotEmpty)
+        //   Flexible(
+        //     child: Column(
+        //       mainAxisSize: MainAxisSize.min,
+        //       children: [
+        //         const Icon(
+        //           Icons.account_circle,
+        //           color: AppColors.secondBackground,
+        //           size: 15,
+        //         ),
+        //         Container(
+        //           padding: const EdgeInsets.all(2),
+        //           decoration: BoxDecoration(
+        //             color: const Color(0xFF2C2B2B),
+        //             borderRadius: BorderRadius.circular(6),
+        //             border: Border.all(
+        //               color: Theme.of(context).colorScheme.primary,
+        //               width: 1,
+        //             ),
+        //           ),
+        //           child: Column(
+        //             children: dettaglioMacchina.tecnici.map(
+        //               (tecnico) {
+        //                 return Text(
+        //                   tecnico.codice,
+        //                   style: Theme.of(context)
+        //                       .textTheme
+        //                       .bodySmall
+        //                       ?.copyWith(
+        //                         fontSize: 7,
+        //                         color: Theme.of(context).colorScheme.background,
+        //                         fontWeight: FontWeight.w500,
+        //                         overflow: TextOverflow.clip,
+        //                       ),
+        //                 );
+        //               },
+        //             ).toList(),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   )
+
+        // Altezza fissa per l'area tecnici
+
+        SizedBox(
+          height: altezzaTecnici,
+          child: dettaglioMacchina.tecnici.isNotEmpty
+              ? Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.account_circle,
+                      color: AppColors.secondBackground,
+                      size: 15,
                     ),
-                  ),
-                  child: Column(
-                    children: dettaglioMacchina.tecnici.map(
-                      (tecnico) {
-                        return Text(
-                          tecnico.codice,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(
-                                fontSize: 7,
-                                color: Theme.of(context).colorScheme.background,
-                                fontWeight: FontWeight.w500,
-                                overflow: TextOverflow.clip,
-                              ),
-                        );
-                      },
-                    ).toList(),
-                  ),
-                ),
-              ],
-            ),
-          )
+                    Container(
+                      padding: const EdgeInsets.all(2),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF2C2B2B),
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 1,
+                        ),
+                      ),
+                      child: SizedBox(
+                        height: dettaglioMacchina.tecnici.length == 1
+                            ? 10
+                            : altezzaTecnici - 20 - 1,
+                        width: 40,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: dettaglioMacchina.tecnici.map(
+                              (tecnico) {
+                                return Text(
+                                  tecnico.codice,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                        fontSize: 7,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                        fontWeight: FontWeight.w500,
+                                        overflow: TextOverflow.clip,
+                                      ),
+                                );
+                              },
+                            ).toList(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : const SizedBox(), // oppure Container(height: altezzaTecnici)
+        ),
       ],
     );
   }

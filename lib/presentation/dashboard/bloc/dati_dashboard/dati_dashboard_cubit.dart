@@ -81,6 +81,21 @@ class DatiDashboardCubit extends Cubit<DatiDashboardState> {
         for (var linea in data.linee) {
           List<DettaglioMacchina> dettagliMacchina = [];
 
+          // Filtra gli interventi di cambio stato per la linea corrente
+          var interventiCambiaFormato = data.wo
+              .where(
+                (wo) =>
+                    wo.puntoDiStrutturaId == linea.id &&
+                    wo.impiantoId == null &&
+                    wo.natura == 'Cambio formato',
+              )
+              .toList();
+
+          interventiCambiaFormato = raggruppaWOEntity(interventiCambiaFormato);
+
+          // Aggiungo gli interventi di cambio stato alla linea
+          linea = linea.copyWith(woCambioStato: interventiCambiaFormato);
+
           var legamiLinea =
               data.legami.where((legame) => legame.lineaId == linea.id);
 
@@ -168,6 +183,21 @@ class DatiDashboardCubit extends Cubit<DatiDashboardState> {
 
         for (var linea in (state as DataLoaded).linee) {
           List<DettaglioMacchina> dettagliMacchina = [];
+
+          // Filtra gli interventi di cambio stato per la linea corrente
+          var interventiCambiaFormato = data
+              .where(
+                (wo) =>
+                    wo.puntoDiStrutturaId == linea.id &&
+                    wo.impiantoId == null &&
+                    wo.natura == 'Cambio formato',
+              )
+              .toList();
+
+          interventiCambiaFormato = raggruppaWOEntity(interventiCambiaFormato);
+
+          // Aggiungo gli interventi di cambio stato alla linea
+          linea = linea.copyWith(woCambioStato: interventiCambiaFormato);
 
           var legamiLinea = (state as DataLoaded)
               .legami

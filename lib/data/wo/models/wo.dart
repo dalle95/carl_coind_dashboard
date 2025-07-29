@@ -23,6 +23,8 @@ class WOModel {
   final String? operatoreLinea;
   final String? tipoIntervento;
   final String? note;
+  final String? cambioFormatoDa;
+  final String? cambioFormatoA;
 
   const WOModel({
     this.id,
@@ -43,6 +45,8 @@ class WOModel {
     this.operatoreLinea,
     this.tipoIntervento,
     this.note,
+    this.cambioFormatoDa,
+    this.cambioFormatoA,
   });
 
   factory WOModel.empty() {
@@ -61,6 +65,12 @@ class WOModel {
       statoMacchina: '',
       operatoreLinea: '',
       tipoIntervento: '',
+      note: '',
+      puntoDiStruttura: null,
+      impianto: null,
+      assegnatoA: null,
+      cambioFormatoDa: '',
+      cambioFormatoA: '',
     );
   }
 
@@ -84,6 +94,8 @@ class WOModel {
       'operatoreLinea': operatoreLinea,
       'tipoIntervento': tipoIntervento,
       'note': note,
+      'cambioFormatoDa': cambioFormatoDa,
+      'cambioFormatoA': cambioFormatoA,
     };
   }
 
@@ -113,6 +125,8 @@ class WOModel {
       operatoreLinea: map['operatoreLinea'],
       tipoIntervento: map['tipoIntervento'],
       note: map['note'],
+      cambioFormatoDa: map['cambioFormatoDa'],
+      cambioFormatoA: map['cambioFormatoA'],
     );
   }
 
